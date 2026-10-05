@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trabajos y Sueldos en España</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+    }
+    .contenedor {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    h1 { text-align: center; margin-bottom: 10px; }
+    .descripcion {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      background: white;
+    }
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover { background: #1d4ed8; }
+    #resultado {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #eff6ff;
+      border-radius: 12px;
+      text-align: center;
+    }
+    #sueldo {
+      font-size: 32px;
+      font-weight: bold;
+      color: #2563eb;
+      margin: 8px 0;
+    }
+    #detalle { color: #4b5563; line-height: 1.5; }
+    .fuente {
+      margin-top: 25px;
+      font-size: 12px;
+      color: #6b7280;
+      text-align: center;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h1>💼 Trabajos y Sueldos</h1>
+    <p class="descripcion">
+      Consulta el sueldo medio aproximado de distintos trabajos en España.
+    </p>
+
+    <label for="orden">Ordenar trabajos</label>
+    <select id="orden" onchange="ordenarTrabajos()">
+      <option value="az">Alfabéticamente: A → Z</option>
+      <option value="za">Alfabéticamente: Z → A</option>
+      <option value="menor">Sueldo: menor → mayor</option>
+      <option value="mayor">Sueldo: mayor → menor</option>
+    </select>
+
+    <label for="trabajo">¿Qué trabajo quieres consultar?</label>
+    <select id="trabajo">
+      <option value="29540">Sueldo medio en España — 29.540 €/año</option>
+      <option value="36000">Abogado — 36.000 €/año</option>
+      <option value="32500">Arquitecto — 32.500 €/año</option>
+      <option value="24000">Enfermero/a — 24.000 €/año</option>
+      <option value="29848">Médico — 29.848 €/año</option>
+      <option value="27500">Programador — 27.500 €/año</option>
+      <option value="34000">Desarrollador web — 34.000 €/año</option>
+      <option value="37500">Ingeniero/a — 37.500 €/año</option>
+      <option value="25500">Policía — 25.500 €/año</option>
+      <option value="24960">Profesor/a — 24.960 €/año</option>
+      <option value="22000">Electricista — 22.000 €/año</option>
+      <option value="24000">Mecánico/a — 24.000 €/año</option>
+      <option value="19200">Fontanero/a — 19.200 €/año</option>
+      <option value="20183">Camarero/a — 20.183 €/año</option>
+      <option value="17538">Cocinero/a — 17.538 €/año</option>
+      <option value="22500">Trabajador/a de almacén — 22.500 €/año</option>
+      <option value="21000">Conductor/a de autobús — 21.000 €/año</option>
+      <option value="22000">Conductor/a de reparto — 22.000 €/año</option>
+      <option value="24000">Diseñador/a gráfico — 24.000 €/año</option>
+      <option value="30000">Contable — 30.000 €/año</option>
+      <option value="25605">Auditor/a — 25.605 €/año</option>
+      <option value="31200">Actor/actriz — 31.200 €/año</option>
+      <option value="24000">Periodista — 24.000 €/año</option>
+      <option value="18500">Traductor/a — 18.500 €/año</option>
+      <option value="40000">Investigador/a privado/a — 40.000 €/año</option>
+      <option value="43000">Consultor/a de seguridad — 43.000 €/año</option>
+      <option value="27000">Director/a de restaurante — 27.000 €/año</option>
+      <option value="35500">Director/a de hotel — 35.500 €/año</option>
+      <option value="27500">Analista de datos — 27.500 €/año</option>
+      <option value="22880">Ingeniero/a de datos — 22.880 €/año</option>
+      <option value="47500">Analista de bases de datos — 47.500 €/año</option>
+      <option value="50000">Dentista — 50.000 €/año</option>
+      <option value="61105">Cardiólogo/a — 61.105 €/año</option>
+      <option value="30500">Técnico/a de laboratorio — 30.500 €/año</option>
+      <option value="38500">Carpintero/a — 38.500 €/año</option>
+      <option value="22880">Personal de limpieza — 22.880 €/año</option>
+      <option value="17000">Cajero/a — 17.000 €/año</option>
+      <option value="18000">Atención al cliente — 18.000 €/año</option>
+      <option value="25000">Maquillador/a — 25.000 €/año</option>
+    </select>
+
+    <button onclick="calcularSueldo()">Ver sueldo</button>
+
+    <div id="resultado">
+      <p>Sueldo medio aproximado:</p>
+      <div id="sueldo">0 €</div>
+      <div id="detalle"></div>
+    </div>
+
+    <div class="fuente">
+      Datos orientativos de 2026. Los sueldos son brutos y pueden variar
+      según experiencia, ciudad, empresa, convenio y tipo de contrato.
+      Como referencia, el INE sitúa el salario medio anual de España en
+      29.540,26 € en 2024.
+    </div>
+  </div>
+
+  <script>
+    function ordenarTrabajos() {
+      const select = document.getElementById("trabajo");
+      const orden = document.getElementById("orden").value;
+
+      const opciones = Array.from(select.options);
+
+      opciones.sort((a, b) => {
+        const nombreA = a.text.split(" — ")[0].toLowerCase();
+        const nombreB = b.text.split(" — ")[0].toLowerCase();
+        const sueldoA = Number(a.value);
+        const sueldoB = Number(b.value);
+
+        if (orden === "az") return nombreA.localeCompare(nombreB, "es");
+        if (orden === "za") return nombreB.localeCompare(nombreA, "es");
+        if (orden === "menor") return sueldoA - sueldoB;
+        if (orden === "mayor") return sueldoB - sueldoA;
+      });
+
+      const valorActual = select.value;
+      select.innerHTML = "";
+
+      opciones.forEach(opcion => select.appendChild(opcion));
+
+      select.value = valorActual;
+    }
+
+    // Orden inicial: alfabético A → Z
+    ordenarTrabajos();
+
+    function calcularSueldo() {
+      const trabajo = document.getElementById("trabajo");
+      const sueldoAnual = Number(trabajo.value);
+      const nombre = trabajo.options[trabajo.selectedIndex].text.split(" — ")[0];
+
+      const sueldoMensual12 = sueldoAnual / 12;
+      const sueldoMensual14 = sueldoAnual / 14;
+
+      document.getElementById("sueldo").textContent =
+        sueldoAnual.toLocaleString("es-ES") + " € / año";
+
+      document.getElementById("detalle").innerHTML =
+        "<strong>" + nombre + "</strong><br>" +
+        "≈ " + sueldoMensual12.toLocaleString("es-ES", {maximumFractionDigits: 0}) +
+        " € brutos/mes en 12 pagas<br>" +
+        "≈ " + sueldoMensual14.toLocaleString("es-ES", {maximumFractionDigits: 0}) +
+        " € brutos/mes en 14 pagas";
+
+      document.getElementById("resultado").style.display = "block";
+    }
+  </script>
+</body>
+</html>
